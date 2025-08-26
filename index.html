@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICONIC CRAFT COFFEE EXPO 2025 | ICONSIAM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Prompt', 'Kanit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .dark {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+            color: #f5f5f5;
+        }
+
+        .coffee-gradient {
+            background: linear-gradient(135deg, #6F4E37 0%, #8B4513 50%, #D2691E 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, #D2691E, #8B4513, #6F4E37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .steam {
+            animation: steam 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes steam {
+            0%, 100% { 
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-30px) scale(1.1);
+                opacity: 0.3;
+            }
+        }
+
+        .coffee-bean {
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(210, 105, 30, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(210, 105, 30, 0.8); }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .highlight-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.3);
+        }
+
+        .dark .highlight-card {
+            background: rgba(30, 30, 30, 0.95);
+            border: 1px solid rgba(210, 105, 30, 0.3);
+        }
+
+        .countdown-box {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(210, 105, 30, 0.1));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(139, 69, 19, 0.3);
+        }
+
+        .dark .countdown-box {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.3), rgba(210, 105, 30, 0.3));
+            border: 2px solid rgba(210, 105, 30, 0.5);
+        }
+
+        .coffee-cursor {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="32" font-size="32">☕</text></svg>'), auto;
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="transition-all duration-500">
+    <!-- Dark Mode Toggle -->
+    <button id="darkToggle" class="fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+        <span id="toggleIcon">🌙</span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-40 shadow-lg">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gradient">☕ COFFEE EXPO 2025</h1>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#about" class="hover:text-amber-600 transition">เกี่ยวกับงาน</a>
+                    <a href="#highlights" class="hover:text-amber-600 transition">ไฮไลต์</a>
+                    <a href="#schedule" class="hover:text-amber-600 transition">กำหนดการ</a>
+                    <a href="#location" class="hover:text-amber-600 transition">สถานที่</a>
+                </div>
+                <button id="mobileMenu" class="md:hidden text-2xl">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenuPanel" class="fixed inset-0 bg-black/50 z-30 hidden">
+        <div class="bg-white dark:bg-gray-900 w-3/4 h-full p-6 slide-in-left">
+            <button id="closeMobileMenu" class="text-2xl mb-6">✕</button>
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="text-lg hover:text-amber-600">เกี่ยวกับงาน</a>
+                <a href="#highlights" class="text-lg hover:text-amber-600">ไฮไลต์</a>
+                <a href="#schedule" class="text-lg hover:text-amber-600">กำหนดการ</a>
+                <a href="#location" class="text-lg hover:text-amber-600">สถานที่</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center coffee-gradient text-white relative overflow-hidden pt-16">
+        <div class="absolute inset-0 bg-black/30"></div>
+        
+        <!-- Animated Coffee Beans Background -->
+        <div class="absolute top-10 left-10 text-6xl coffee-bean opacity-20">☕</div>
+        <div class="absolute bottom-20 right-20 text-8xl coffee-bean opacity-20" style="animation-delay: 2s;">☕</div>
+        <div class="absolute top-1/2 left-1/4 text-5xl coffee-bean opacity-20" style="animation-delay: 4s;">☕</div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10 fade-in">
+            <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6 floating">
+                ICONIC CRAFT<br>
+                <span class="text-yellow-300">COFFEE EXPO 2025</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8">
+                🏆 งานกาแฟที่ยิ่งใหญ่ที่สุดแห่งปี
+            </p>
+            <div class="bg-white/20 backdrop-blur-md rounded-2xl p-6 inline-block mb-8">
+                <p class="text-lg md:text-xl font-semibold mb-2">📅 29 สิงหาคม - 7 กันยายน 2568</p>
+                <p class="text-lg">📍 ICONSIAM River Park</p>
+            </div>
+            <div class="space-y-4 md:space-y-0 md:space-x-4">
+                <a href="https://bit.ly/4mthFOH" target="_blank" class="inline-block bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transform hover:scale-105 transition pulse-glow">
+                    🎫 ข้อมูลเพิ่มเติม
+                </a>
+                <button onclick="scrollToSection('highlights')" class="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transform hover:scale-105 transition">
+                    ดูไฮไลต์งาน
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Image -->
+    <section class="py-12 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <img src="https://lh5.googleusercontent.com/d/14J7s_IUbccvG1N9JV8Lwn1vmJhb8WIpK" 
+                 alt="ICONIC CRAFT COFFEE EXPO 2025" 
+                 class="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl hover:scale-105 transition duration-500">
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="py-12 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gradient">⏰ นับถอยหลังสู่งานกาแฟแห่งปี</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="countdown-box rounded-xl p-6 text-center">
+                    <div id="days" class="text-4xl font-bold text-amber-600">00</div>
+                    <div class="text-sm mt-2">วัน</div>
+                </div>
+                <div class="countdown-box rounded-xl p-6 text-center">
+                    <div id="hours" class="text-4xl font-bold text-amber-600">00</div>
+                    <div class="text-sm mt-2">ชั่วโมง</div>
+                </div>
+                <div class="countdown-box rounded-xl p-6 text-center">
+                    <div id="minutes" class="text-4xl font-bold text-amber-600">00</div>
+                    <div class="text-sm mt-2">นาที</div>
+                </div>
+                <div class="countdown-box rounded-xl p-6 text-center">
+                    <div id="seconds" class="text-4xl font-bold text-amber-600">00</div>
+                    <div class="text-sm mt-2">วินาที</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gradient">☕ โลกแห่งกาแฟที่สมบูรณ์แบบ</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="highlight-card rounded-2xl p-6 text-center">
+                    <div class="text-5xl mb-4 floating">☕</div>
+                    <h3 class="text-2xl font-bold mb-2 text-amber-700">100+ ร้านค้า</h3>
+                    <p>ร้านกาแฟชื่อดังจากทั่วประเทศไทย</p>
+                </div>
+                <div class="highlight-card rounded-2xl p-6 text-center">
+                    <div class="text-5xl mb-4 floating" style="animation-delay: 0.5s;">📋</div>
+                    <h3 class="text-2xl font-bold mb-2 text-amber-700">1,000+ เมนู</h3>
+                    <p>เมนูกาแฟหลากหลายจากทั่วโลก</p>
+                </div>
+                <div class="highlight-card rounded-2xl p-6 text-center">
+                    <div class="text-5xl mb-4 floating" style="animation-delay: 1s;">🏆</div>
+                    <h3 class="text-2xl font-bold mb-2 text-amber-700">บาริสต้าระดับแชมป์</h3>
+                    <p>การันตีคุณภาพระดับโลก</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section id="highlights" class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gradient">✨ ไฮไลต์ที่ไม่ควรพลาด</h2>
+            <div class="space-y-6 max-w-4xl mx-auto">
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-2xl hover:scale-105 transition">
+                    <h3 class="text-xl font-bold mb-2 text-amber-700 dark:text-amber-400">🌟 Special Guest: Win Metawin</h3>
+                    <p>พบกับ วิน เมธวิน ที่จะมาเสิร์ฟเมนูเอ็กซ์คลูซีฟให้ทุกคน</p>
+                </div>
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-2xl hover:scale-105 transition">
+                    <h3 class="text-xl font-bold mb-2 text-amber-700 dark:text-amber-400">🎭 MaxkyBas Coffee Lovers</h3>
+                    <p>ช่วงเวลาพิเศษกับ แม็กกี้ บาส ที่จะมาทำให้ช่วงเวลากาแฟหอมกรุ่นยิ่งขึ้น</p>
+                </div>
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-2xl hover:scale-105 transition">
+                    <h3 class="text-xl font-bold mb-2 text-amber-700 dark:text-amber-400">🏅 Thailand Iconic Coffee Championship 2025</h3>
+                    <p>การแข่งขันบาริสต้าระดับประเทศโดยกรรมการระดับโลก</p>
+                </div>
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-2xl hover:scale-105 transition">
+                    <h3 class="text-xl font-bold mb-2 text-amber-700 dark:text-amber-400">🌿 Workshop รักษ์โลก</h3>
+                    <p>กิจกรรม Workshop พร้อมรับฟรีปุ๋ยจากกากกาแฟ</p>
+                </div>
+                <div class="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 p-6 rounded-2xl hover:scale-105 transition">
+                    <h3 class="text-xl font-bold mb-2 text-amber-700 dark:text-amber-400">🎁 Passport สะสมแสตมป์</h3>
+                    <p>สมุด Passport สุดเอ็กซ์คลูซีฟเพื่อแลกรับของรางวัลมากมาย</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Cafes Section -->
+    <section class="py-16 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-gray-800 dark:to-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gradient">🌏 คาเฟ่ระดับโลก</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:scale-105 transition">
+                    <div class="text-4xl mb-4">🇰🇷</div>
+                    <h3 class="text-2xl font-bold mb-3 text-amber-700">คาเฟ่จากเกาหลี</h3>
+                    <p>สัมผัสประสบการณ์กาแฟสไตล์เกาหลีที่กำลังเป็นกระแสทั่วโลก</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:scale-105 transition">
+                    <div class="text-4xl mb-4">🇲🇾</div>
+                    <h3 class="text-2xl font-bold mb-3 text-amber-700">คาเฟ่จากมาเลเซีย</h3>
+                    <p>ลิ้มรสกาแฟแบบมาเลเซียที่มีเอกลักษณ์เฉพาะตัว</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gradient">📅 กำหนดการ</h2>
+            <div class="max-w-4xl mx-auto bg-gradient-to-r from-amber-50 to-orange-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-8 shadow-xl">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-amber-700 dark:text-amber-400">📆 วันที่จัดงาน</h3>
+                        <p class="text-lg">29 สิงหาคม - 7 กันยายน 2568</p>
+                        <p class="text-gray-600 dark:text-gray-400">รวม 10 วันเต็ม</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-amber-700 dark:text-amber-400">⏰ เวลา</h3>
+                        <p class="text-lg">10:00 - 22:00 น.</p>
+                        <p class="text-gray-600 dark:text-gray-400">ทุกวันตลอดงาน</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gradient">📍 สถานที่จัดงาน</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl">
+                    <h3 class="text-2xl font-bold mb-4 text-amber-700 dark:text-amber-400">ICONSIAM</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">🏢</span>
+                            <div>
+                                <p class="font-semibold">River Park ชั้น G</p>
+                                <p class="text-gray-600 dark:text-gray-400">พื้นที่หลักของงาน</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-4">🎪</span>
+                            <div>
+                                <p class="font-semibold">Event Space ชั้น M</p>
+                                <p class="text-gray-600 dark:text-gray-400">พื้นที่กิจกรรมพิเศษ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://goo.gl/maps/iconsiam" target="_blank" class="inline-block mt-6 bg-amber-600 text-white px-6 py-3 rounded-full hover:bg-amber-700 transition">
+                        🗺️ ดูแผนที่
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 coffee-gradient text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">พร้อมเข้าสู่โลกแห่งกาแฟแล้วหรือยัง?</h2>
+            <p class="text-xl mb-8">มาร่วมเป็นส่วนหนึ่งของงานกาแฟที่ยิ่งใหญ่ที่สุดแห่งปี</p>
+            <div class="space-y-4 md:space-y-0 md:space-x-4">
+                <a href="https://bit.ly/4mthFOH" target="_blank" class="inline-block bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transform hover:scale-105 transition">
+                    🎫 ดูรายละเอียดเพิ่มเติม
+                </a>
+                <a href="https://www.iconsiam.com" target="_blank" class="inline-block bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transform hover:scale-105 transition">
+                    🌐 เว็บไซต์ ICONSIAM
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="mb-4">© 2025 ICONIC CRAFT COFFEE EXPO | ICONSIAM</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="hover:text-amber-400 transition">#ICONSIAM</a>
+                    <a href="#" class="hover:text-amber-400 transition">#ICONICCraftCoffeeExpo</a>
+                    <a href="#" class="hover:text-amber-400 transition">#งานกาแฟที่ไอคอนสยาม</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const darkToggle = document.getElementById('darkToggle');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const body = document.body;
+
+        darkToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            toggleIcon.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', body.classList.contains('dark'));
+        });
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark');
+            toggleIcon.textContent = '☀️';
+        }
+
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenuPanel.classList.remove('hidden');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenuPanel.classList.add('hidden');
+        });
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('#mobileMenuPanel a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuPanel.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll function
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('2025-08-29T10:00:00+07:00');
+            const now = new Date();
+            const diff = eventDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.highlight-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add coffee cursor on hover for specific elements
+        document.querySelectorAll('.coffee-gradient, .text-gradient').forEach(el => {
+            el.classList.add('coffee-cursor');
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.coffee-gradient');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Random floating animation delay for coffee beans
+        document.querySelectorAll('.coffee-bean').forEach((bean, index) => {
+            bean.style.animationDelay = `${index * 2}s`;
+        });
+
+        // Click effect
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 100);
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1s';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Console message
+        console.log('%c☕ Welcome to ICONIC CRAFT COFFEE EXPO 2025! ☕', 'color: #D2691E; font-size: 20px; font-weight: bold;');
+        console.log('%cThe biggest coffee event of the year at ICONSIAM', 'color: #8B4513; font-size: 14px;');
+    </script>
+</body>
+</html>
